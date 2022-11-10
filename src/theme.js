@@ -1,10 +1,7 @@
 const theme = {
-  primary: '#81DECF',
-  secondary: 'rgba(101, 220, 199, 0.3)',
-  background: '#FFFFFF',
-  secondBackgroundColor: '#ECECEC',
-  buttonColor: 'rgba(101, 220, 199, 0.8)',
-  buttonHover: 'rgba(11, 220, 199, 0.8)',
+  primary: '#1F3064',
+  secondary: '#FEC20C',
+  white: '#FFFFFF',
   error: '#F70000'
 }
 
