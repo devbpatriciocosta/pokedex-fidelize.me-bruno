@@ -7,6 +7,7 @@ import H1 from '../src/components/typograph/H1'
 import H2 from '../src/components/typograph/H2'
 import SearchBarInput from '../src/components/searchBarInput/SearchBarInput'
 import PokemonCard from '../src/components/pokemonCard/PokemonCard'
+import Pokedex from '../src/components/pokedex/Pokedex'
 
 const SecondaryContainer = styled.div`
   width: auto;
@@ -83,16 +84,9 @@ function HomePage() {
               <PokemonCard></PokemonCard>
             </FavoritesPokemonContainer>
             <AllPokemons>
-              <H2>Todos os pokémons encontrados</H2>
+              <H2>Pokedéx</H2>
             </AllPokemons>
-            <FavoritesPokemonContainer>
-              <PokemonCard></PokemonCard>
-              <PokemonCard></PokemonCard>
-              <PokemonCard></PokemonCard>
-              <PokemonCard></PokemonCard>
-              <PokemonCard></PokemonCard>
-              <PokemonCard></PokemonCard>
-            </FavoritesPokemonContainer>
+            <Pokedex />
           </SecondaryContainer>
         </Container>
       </Body>
