@@ -1,4 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 import styled from 'styled-components'
+import PokemonCard from '../pokemonCard/PokemonCard'
+import H2 from '../typograph/H2'
 
 const PokedexContainer = styled.div`
   display: grid;
@@ -26,6 +29,26 @@ const PokedexContainer = styled.div`
   }
 `
 
-export default function Pokedex() {
-  return <PokedexContainer></PokedexContainer>
+export default function Pokedex({ ...props }) {
+  const { pokemon, loading } = props
+  return (
+    <>
+      <PokedexContainer>
+        {loading ? (
+          <H2>Iniciando... só um momento, Ash</H2>
+        ) : (
+          <div>
+            {pokemon &&
+              pokemon.map((pokemon, index) => {
+                return (
+                  <>
+                    <PokemonCard key={index} pokemon={pokemon} />
+                  </>
+                )
+              })}
+          </div>
+        )}
+      </PokedexContainer>
+    </>
+  )
 }

@@ -6,8 +6,10 @@ import Container from '../src/components/layout/container/Container'
 import H1 from '../src/components/typograph/H1'
 import H2 from '../src/components/typograph/H2'
 import SearchBarInput from '../src/components/searchBarInput/SearchBarInput'
-import PokemonCard from '../src/components/pokemonCard/PokemonCard'
 import Pokedex from '../src/components/pokedex/Pokedex'
+
+import { useEffect, useState } from 'react'
+import { getPokemons } from './api/pokedex/pokemonApi'
 
 const SecondaryContainer = styled.div`
   width: auto;
@@ -67,6 +69,25 @@ const AllPokemons = styled.div`
 `
 
 function HomePage() {
+  const [loading, setLoading] = useState(false)
+  const [pokemon, setPokemon] = useState([])
+
+  useEffect(() => {
+    fetchAllPokemons()
+    console.log('carregou')
+  }, [])
+
+  const fetchAllPokemons = async () => {
+    try {
+      setLoading(true)
+      const result = await getPokemons()
+      setPokemon(result)
+      setLoading(false)
+    } catch (err) {
+      console.log('fetchPokemons error', err)
+    }
+  }
+
   return (
     <>
       <NavBar />
@@ -80,13 +101,11 @@ function HomePage() {
             <MyFavorites>
               <H2>Favoritos</H2>
             </MyFavorites>
-            <FavoritesPokemonContainer>
-              <PokemonCard></PokemonCard>
-            </FavoritesPokemonContainer>
+            <FavoritesPokemonContainer></FavoritesPokemonContainer>
             <AllPokemons>
               <H2>Pokedéx</H2>
             </AllPokemons>
-            <Pokedex />
+            <Pokedex loading={loading} pokemon={pokemon.results} />
           </SecondaryContainer>
         </Container>
       </Body>
