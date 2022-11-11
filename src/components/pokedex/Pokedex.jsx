@@ -33,22 +33,20 @@ export default function Pokedex({ ...props }) {
   const { pokemon, loading } = props
   return (
     <>
-      <PokedexContainer>
-        {loading ? (
-          <H2>Iniciando... só um momento, Ash</H2>
-        ) : (
-          <div>
-            {pokemon &&
-              pokemon.map((pokemon, index) => {
-                return (
-                  <>
-                    <PokemonCard key={index} pokemon={pokemon} />
-                  </>
-                )
-              })}
-          </div>
-        )}
-      </PokedexContainer>
+      {loading ? (
+        <H2>Iniciando... só um momento, Ash</H2>
+      ) : (
+        <PokedexContainer>
+          {pokemon &&
+            pokemon.map((pokemon, index) => {
+              return (
+                <>
+                  <PokemonCard key={index} pokemon={pokemon} />
+                </>
+              )
+            })}
+        </PokedexContainer>
+      )}
     </>
   )
 }

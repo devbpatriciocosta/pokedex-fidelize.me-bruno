@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import styled from 'styled-components'
 
 import NavBar from '../src/components/navBar/NavBar'
@@ -9,7 +10,7 @@ import SearchBarInput from '../src/components/searchBarInput/SearchBarInput'
 import Pokedex from '../src/components/pokedex/Pokedex'
 
 import { useEffect, useState } from 'react'
-import { getPokemons } from './api/pokedex/pokemonApi'
+import { getPokemons, getPokemonData } from './api/pokedex/pokemonApi'
 
 const SecondaryContainer = styled.div`
   width: auto;
@@ -80,7 +81,12 @@ function HomePage() {
   const fetchAllPokemons = async () => {
     try {
       setLoading(true)
-      const result = await getPokemons()
+      const data = await getPokemons()
+      const promises = data.results.map(async (pokemon) => {
+        return await getPokemonData(pokemon.url)
+      })
+
+      const result = await Promise.all(promises)
       setPokemon(result)
       setLoading(false)
     } catch (err) {
@@ -105,7 +111,7 @@ function HomePage() {
             <AllPokemons>
               <H2>Pokedéx</H2>
             </AllPokemons>
-            <Pokedex loading={loading} pokemon={pokemon.results} />
+            <Pokedex loading={loading} pokemon={pokemon} />
           </SecondaryContainer>
         </Container>
       </Body>
