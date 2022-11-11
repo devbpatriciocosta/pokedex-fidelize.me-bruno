@@ -5,6 +5,8 @@ import ButtonAdding from '../button/SearchButton'
 import { searchPokemon } from '../../../pages/api/pokedex/pokemonApi'
 
 import { useState } from 'react'
+import { AiOutlineLike } from 'react-icons/ai'
+import H2 from '../typograph/H2'
 
 const IconImageContainer = styled.div`
   padding: 52px 0 32px 0;
@@ -56,6 +58,49 @@ const StyledIconPosition = styled.div`
   font-size: 30px;
 `
 
+const CardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 270px;
+  height: 280px;
+  color: white;
+  border-radius: 15px;
+  background-color: ${(props) => props.color};
+  box-shadow: 10px 10px 10px 5px rgba(51, 51, 51, 0.8);
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+
+  :hover {
+    transform: scale(1.1);
+  }
+`
+
+const StyledPokemonData = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`
+const StyledPokemonNameAndNumber = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+`
+
+const StyledPokemonType = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+`
+
+const StyledLikeIcon = styled.div`
+  color: black;
+  font-size: 24px;
+  margin-top: 10px;
+  margin-left: 200px;
+  cursor: pointer;
+`
+
 const SearchBarInput = ({ ...props }) => {
   const [search, setSearch] = useState('ditto')
   const [pokemon, setPokemon] = useState()
@@ -71,6 +116,10 @@ const SearchBarInput = ({ ...props }) => {
   const onSearchHandler = async (pokemon) => {
     const result = await searchPokemon(pokemon)
     setPokemon(result)
+  }
+
+  const onLikeClick = () => {
+    console.log('Meu Pokemon Favorito')
   }
 
   return (
@@ -90,11 +139,23 @@ const SearchBarInput = ({ ...props }) => {
         <ButtonAdding onClick={onClickHandler}>Buscar</ButtonAdding>
       </IconImageContainer>
       {pokemon ? (
-        <div>
+        <CardContainer>
+          <StyledLikeIcon>
+            <AiOutlineLike onClick={onLikeClick} />
+          </StyledLikeIcon>
           <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-          <div>Nome: {pokemon.name}</div>
-          <div>Peso: {pokemon.weight} kg</div>
-        </div>
+          <StyledPokemonData>
+            <StyledPokemonNameAndNumber>
+              <H2>Nome: {pokemon.name}</H2>
+              <H2>#{pokemon.id}</H2>
+            </StyledPokemonNameAndNumber>
+            <StyledPokemonType>
+              {pokemon.types.map((type, index) => {
+                return <H2 key={index}>{type.type.name}</H2>
+              })}
+            </StyledPokemonType>
+          </StyledPokemonData>
+        </CardContainer>
       ) : null}
     </>
   )

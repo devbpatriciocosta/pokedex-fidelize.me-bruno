@@ -30,6 +30,7 @@ const StyledPokemonNameAndNumber = styled.div`
   display: flex;
   justify-content: center;
   gap: 10px;
+  text-transform: capitalize;
 `
 
 const StyledPokemonType = styled.div`
@@ -47,9 +48,11 @@ const StyledLikeIcon = styled.div`
 `
 
 const PokemonCard = ({ ...props }) => {
-  const { pokemon } = props
-  const onLikeClick = () => {
+  const { pokemon, setLiked } = props
+
+  const onLikeClick = async () => {
     console.log('Meu Pokemon Favorito')
+    setLiked()
   }
 
   return (
@@ -65,6 +68,7 @@ const PokemonCard = ({ ...props }) => {
         </StyledPokemonNameAndNumber>
         <StyledPokemonType>
           {pokemon.types.map((type, index) => {
+            console.log(type, index)
             return <H2 key={index}>{type.type.name}</H2>
           })}
         </StyledPokemonType>
