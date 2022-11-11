@@ -1,9 +1,16 @@
+/* eslint-disable @next/next/no-img-element */
 import styled from 'styled-components'
 import IconImages from '../iconImages/IconImages'
+import ButtonAdding from '../button/SearchButton'
+import { searchPokemon } from '../../../pages/api/pokedex/pokemonApi'
+
+import { useState } from 'react'
 
 const IconImageContainer = styled.div`
   padding: 52px 0 32px 0;
   display: flex;
+  flex-direction: column;
+  gap: 50px;
   align-items: center;
   justify-content: center;
 `
@@ -50,16 +57,45 @@ const StyledIconPosition = styled.div`
 `
 
 const SearchBarInput = ({ ...props }) => {
+  const [search, setSearch] = useState('ditto')
+  const [pokemon, setPokemon] = useState()
+
+  const onChangeHandler = (event) => {
+    setSearch(event.target.value)
+  }
+
+  const onClickHandler = () => {
+    onSearchHandler(search)
+  }
+
+  const onSearchHandler = async (pokemon) => {
+    const result = await searchPokemon(pokemon)
+    setPokemon(result)
+  }
+
   return (
     <>
       <IconImageContainer>
         <ContainerInput>
-          <StyledInput type="text" placeholder="Pesquise por nome, tipo ou poder..." {...props} />
+          <StyledInput
+            type="text"
+            placeholder="Pesquise por nome, tipo ou poder..."
+            {...props}
+            onChange={onChangeHandler}
+          />
           <StyledIconPosition>
             <IconImages imageName="pokeBall" type="svg" />
           </StyledIconPosition>
         </ContainerInput>
+        <ButtonAdding onClick={onClickHandler}>Buscar</ButtonAdding>
       </IconImageContainer>
+      {pokemon ? (
+        <div>
+          <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+          <div>Nome: {pokemon.name}</div>
+          <div>Peso: {pokemon.weight} kg</div>
+        </div>
+      ) : null}
     </>
   )
 }
