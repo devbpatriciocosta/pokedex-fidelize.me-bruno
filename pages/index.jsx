@@ -8,9 +8,11 @@ import H1 from '../src/components/typograph/H1'
 import H2 from '../src/components/typograph/H2'
 import SearchBarInput from '../src/components/searchBarInput/SearchBarInput'
 import Pokedex from '../src/components/pokedex/Pokedex'
+import MyFavorites from '../src/components/favorites/MyFavorites'
 
 import { useEffect, useState } from 'react'
 import { getPokemons, getPokemonData } from './api/pokedex/pokemonApi'
+import { FavoriteProvider } from '../src/context/favorites'
 
 const SecondaryContainer = styled.div`
   width: auto;
@@ -33,37 +35,6 @@ const SecondaryContainer = styled.div`
   }
 `
 
-const MyFavorites = styled.div`
-  margin-top: 30px;
-  font-size: 18px;
-`
-
-const FavoritesPokemonContainer = styled.div`
-  display: grid;
-  margin-top: 20px;
-  grid-column-gap: 45px;
-  grid-row-gap: 43px;
-  grid-template-columns: repeat(3, 1fr);
-
-  @media (max-width: 857px) {
-    grid-row-gap: 10px;
-    grid-column-gap: 10px;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: 689px) {
-    grid-row-gap: 10px;
-    grid-column-gap: 5px;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: 630px) {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-`
-
 const AllPokemons = styled.div`
   margin-top: 30px;
   font-size: 18px;
@@ -72,6 +43,7 @@ const AllPokemons = styled.div`
 function HomePage() {
   const [loading, setLoading] = useState(false)
   const [pokemon, setPokemon] = useState([])
+  const [favorites, setFavorites] = useState([])
 
   useEffect(() => {
     fetchAllPokemons()
@@ -94,27 +66,42 @@ function HomePage() {
     }
   }
 
+  const updateFavoritePokemons = (name) => {
+    const updatedFavorites = [...favorites]
+    const favoriteIndex = favorites.indexOf(name)
+    if (favoriteIndex >= 0) {
+      updatedFavorites.slice(favoriteIndex, 1)
+    } else {
+      updatedFavorites.push(name)
+    }
+    setFavorites(updatedFavorites)
+  }
+
   return (
     <>
-      <NavBar />
-      <Body>
-        <Container>
-          <H1>
-            Hey, Ash! <br></br>Qual pokémon você deseja pesquisar hoje?
-          </H1>
-          <SearchBarInput />
-          <SecondaryContainer>
-            <MyFavorites>
-              <H2>Favoritos</H2>
-            </MyFavorites>
-            <FavoritesPokemonContainer></FavoritesPokemonContainer>
-            <AllPokemons>
-              <H2>Pokedéx</H2>
-            </AllPokemons>
-            <Pokedex loading={loading} pokemon={pokemon} />
-          </SecondaryContainer>
-        </Container>
-      </Body>
+      <FavoriteProvider
+        value={{
+          favoritePokemons: favorites,
+          updateFavoritePokemons: updateFavoritePokemons
+        }}
+      >
+        <NavBar />
+        <Body>
+          <Container>
+            <H1>
+              Hey, Ash! <br></br>Qual pokémon você deseja pesquisar hoje?
+            </H1>
+            <SearchBarInput />
+            <SecondaryContainer>
+              <MyFavorites />
+              <AllPokemons>
+                <H2>Pokedéx</H2>
+              </AllPokemons>
+              <Pokedex loading={loading} pokemon={pokemon} />
+            </SecondaryContainer>
+          </Container>
+        </Body>
+      </FavoriteProvider>
     </>
   )
 }

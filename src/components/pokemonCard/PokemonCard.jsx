@@ -1,7 +1,10 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable @next/next/no-img-element */
 import styled from 'styled-components'
 import H2 from '../typograph/H2'
 import { AiOutlineLike } from 'react-icons/ai'
+import { useContext } from 'react'
+import FavoriteContext from '../../context/favorites'
 
 const CardContainer = styled.div`
   display: flex;
@@ -47,16 +50,46 @@ const StyledLikeIcon = styled.div`
   cursor: pointer;
 `
 
+const transformColor = (type) => {
+  const colors = {
+    fire: '#CD5555',
+    grass: '#2E8B57',
+    water: '#00008B',
+    eletric: '#EEEE00'
+  }
+  return colors[type] || 'rgb(175, 175,175,0.25)'
+}
+
 const PokemonCard = ({ ...props }) => {
-  const { pokemon, setLiked } = props
+  const { favoritePokemons, updateFavoritePokemons } = useContext(FavoriteContext)
+  const { pokemon } = props
 
   const onLikeClick = async () => {
     console.log('Meu Pokemon Favorito')
-    setLiked()
+    updateFavoritePokemons(
+      <CardContainer color={transformColor(pokemon.type)}>
+        <StyledLikeIcon>
+          <AiOutlineLike onClick={onLikeClick} />
+        </StyledLikeIcon>
+        <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+        <StyledPokemonData>
+          <StyledPokemonNameAndNumber>
+            <H2>Nome: {pokemon.name}</H2>
+            <H2>#{pokemon.id}</H2>
+          </StyledPokemonNameAndNumber>
+          <StyledPokemonType>
+            {pokemon.types.map((type, index) => {
+              console.log(type, index)
+              return <H2 key={index}>{type.type.name}</H2>
+            })}
+          </StyledPokemonType>
+        </StyledPokemonData>
+      </CardContainer>
+    )
   }
 
   return (
-    <CardContainer>
+    <CardContainer color={transformColor(pokemon.type)}>
       <StyledLikeIcon>
         <AiOutlineLike onClick={onLikeClick} />
       </StyledLikeIcon>
