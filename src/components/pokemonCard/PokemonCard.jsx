@@ -3,6 +3,7 @@
 import styled from 'styled-components'
 import H2 from '../typograph/H2'
 import { AiOutlineLike } from 'react-icons/ai'
+import { AiFillLike } from 'react-icons/ai'
 import { useContext } from 'react'
 import FavoriteContext from '../../context/favorites'
 
@@ -65,11 +66,10 @@ const PokemonCard = ({ ...props }) => {
   const { pokemon } = props
 
   const onLikeClick = async () => {
-    console.log('Meu Pokemon Favorito')
     updateFavoritePokemons(
       <CardContainer color={transformColor(pokemon.type)}>
         <StyledLikeIcon>
-          <AiOutlineLike onClick={onLikeClick} />
+          <AiFillLike />
         </StyledLikeIcon>
         <img src={pokemon.sprites.front_default} alt={pokemon.name} />
         <StyledPokemonData>
@@ -88,11 +88,11 @@ const PokemonCard = ({ ...props }) => {
     )
   }
 
+  const like = favoritePokemons.includes(pokemon.name) ? <AiFillLike /> : <AiOutlineLike />
+
   return (
     <CardContainer color={transformColor(pokemon.type)}>
-      <StyledLikeIcon>
-        <AiOutlineLike onClick={onLikeClick} />
-      </StyledLikeIcon>
+      <StyledLikeIcon onClick={onLikeClick}>{like}</StyledLikeIcon>
       <img src={pokemon.sprites.front_default} alt={pokemon.name} />
       <StyledPokemonData>
         <StyledPokemonNameAndNumber>

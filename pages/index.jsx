@@ -40,14 +40,24 @@ const AllPokemons = styled.div`
   font-size: 18px;
 `
 
+const myPartyKey = 'my Pokemons'
+
 function HomePage() {
   const [loading, setLoading] = useState(false)
   const [pokemon, setPokemon] = useState([])
   const [favorites, setFavorites] = useState([])
 
+  const myPartyPokemons = () => {
+    const pokemons = JSON.parse(window.localStorage.getItem(myPartyKey)) || []
+    setFavorites(pokemons)
+  }
+
   useEffect(() => {
     fetchAllPokemons()
-    console.log('carregou')
+  }, [])
+
+  useEffect(() => {
+    myPartyPokemons()
   }, [])
 
   const fetchAllPokemons = async () => {
@@ -70,10 +80,11 @@ function HomePage() {
     const updatedFavorites = [...favorites]
     const favoriteIndex = favorites.indexOf(name)
     if (favoriteIndex >= 0) {
-      updatedFavorites.slice(favoriteIndex, 1)
+      updatedFavorites.splice(favoriteIndex, 1)
     } else {
       updatedFavorites.push(name)
     }
+    window.localStorage.setItem(favoriteIndex, JSON.stringify(updatedFavorites))
     setFavorites(updatedFavorites)
   }
 

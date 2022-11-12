@@ -6,7 +6,10 @@ import { searchPokemon } from '../../../pages/api/pokedex/pokemonApi'
 
 import { useState } from 'react'
 import { AiOutlineLike } from 'react-icons/ai'
+import { AiFillLike } from 'react-icons/ai'
 import H2 from '../typograph/H2'
+import { useContext } from 'react'
+import FavoriteContext from '../../context/favorites'
 
 const IconImageContainer = styled.div`
   padding: 52px 0 32px 0;
@@ -104,9 +107,13 @@ const StyledLikeIcon = styled.div`
 const SearchBarInput = ({ ...props }) => {
   const [search, setSearch] = useState('ditto')
   const [pokemon, setPokemon] = useState()
+  const { favoritePokemons, updateFavoritePokemons } = useContext(FavoriteContext)
 
   const onChangeHandler = (event) => {
     setSearch(event.target.value)
+    if (event.target.value === 0) {
+      onSearchHandler(undefined)
+    }
   }
 
   const onClickHandler = () => {
@@ -119,8 +126,29 @@ const SearchBarInput = ({ ...props }) => {
   }
 
   const onLikeClick = () => {
-    console.log('Meu Pokemon Favorito')
+    updateFavoritePokemons(
+      <CardContainer>
+        <StyledLikeIcon>
+          <AiFillLike />
+        </StyledLikeIcon>
+        <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+        <StyledPokemonData>
+          <StyledPokemonNameAndNumber>
+            <H2>Nome: {pokemon.name}</H2>
+            <H2>#{pokemon.id}</H2>
+          </StyledPokemonNameAndNumber>
+          <StyledPokemonType>
+            {pokemon.types.map((type, index) => {
+              console.log(type, index)
+              return <H2 key={index}>{type.type.name}</H2>
+            })}
+          </StyledPokemonType>
+        </StyledPokemonData>
+      </CardContainer>
+    )
   }
+
+  const like = favoritePokemons.includes(pokemon) ? <AiFillLike /> : <AiOutlineLike />
 
   return (
     <>
@@ -128,7 +156,7 @@ const SearchBarInput = ({ ...props }) => {
         <ContainerInput>
           <StyledInput
             type="text"
-            placeholder="Pesquise por nome, tipo ou poder..."
+            placeholder="Pesquise por nome..."
             {...props}
             onChange={onChangeHandler}
           />
@@ -140,9 +168,7 @@ const SearchBarInput = ({ ...props }) => {
       </IconImageContainer>
       {pokemon ? (
         <CardContainer>
-          <StyledLikeIcon>
-            <AiOutlineLike onClick={onLikeClick} />
-          </StyledLikeIcon>
+          <StyledLikeIcon onClick={onLikeClick}>{like}</StyledLikeIcon>
           <img src={pokemon.sprites.front_default} alt={pokemon.name} />
           <StyledPokemonData>
             <StyledPokemonNameAndNumber>
