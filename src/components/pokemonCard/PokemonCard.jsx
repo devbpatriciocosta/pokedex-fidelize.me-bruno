@@ -60,15 +60,23 @@ const StyledLikeIcon = styled.div`
   margin-top: 10px;
 `
 
-const transformTypeInColor = (type) => {
-  console.log(type)
+const transformTypeInColor = (color) => {
   const colors = {
+    bulbasaur: '#2E8B57',
+    ivysaur: '#2E8B57',
+    venusaur: '#2E8B57',
+    charmander: '#ec4a4a',
+    charmeleon: '#ec4a4a',
     charizard: '#ec4a4a',
-    grass: '#2E8B57',
-    water: '#00008B',
+    squirtle: '#00008B',
+    wartortle: '#00008B',
+    blastoise: '#00008B',
+    caterpie: '#2E8B57',
+    metapod: '#2E8B57',
+    butterfree: '#2E8B57',
     eletric: '#EEEE00'
   }
-  return colors[type] || 'rgb(175, 175,175,0.25)'
+  return colors[color] || 'rgb(175, 175,175,0.25)'
 }
 
 const PokemonCard = ({ ...props }) => {
@@ -89,7 +97,7 @@ const PokemonCard = ({ ...props }) => {
 
   const onLikeClick = async () => {
     updateFavoritePokemons(
-      <CardContainer color={transformTypeInColor(pokemon)}>
+      <CardContainer color={transformTypeInColor(pokemon.name)}>
         <StyledIcons>
           <StyledLikeIcon>
             <AiFillLike />
@@ -133,7 +141,7 @@ const PokemonCard = ({ ...props }) => {
   const like = favoritePokemons.includes(pokemon.name) ? <AiFillLike /> : <AiOutlineLike />
 
   return (
-    <CardContainer color={transformTypeInColor(pokemon)}>
+    <CardContainer color={transformTypeInColor(pokemon.name)}>
       <StyledIcons>
         <StyledLikeIcon onClick={onLikeClick}>{like}</StyledLikeIcon>
         <StyledLikeIcon>
