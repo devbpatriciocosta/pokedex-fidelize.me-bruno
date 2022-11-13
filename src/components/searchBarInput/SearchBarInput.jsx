@@ -7,6 +7,7 @@ import { searchPokemon } from '../../../pages/api/pokedex/pokemonApi'
 import { useState } from 'react'
 import { AiOutlineLike } from 'react-icons/ai'
 import { AiFillLike } from 'react-icons/ai'
+import { AiOutlinePlusCircle } from 'react-icons/ai'
 import H2 from '../typograph/H2'
 import { useContext } from 'react'
 import FavoriteContext from '../../context/favorites'
@@ -65,11 +66,11 @@ const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 270px;
-  height: 280px;
+  width: 280px;
+  height: 420px;
   color: white;
   border-radius: 15px;
-  background-color: ${(props) => props.theme.background};
+  background-color: ${(props) => props.color};
   box-shadow: 10px 10px 10px 5px rgba(51, 51, 51, 0.8);
   transition: 0.2s ease-in-out;
   cursor: pointer;
@@ -84,8 +85,10 @@ const StyledPokemonData = styled.div`
   flex-direction: column;
   justify-content: center;
 `
+
 const StyledPokemonNameAndNumber = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   gap: 10px;
   text-transform: capitalize;
@@ -97,17 +100,24 @@ const StyledPokemonType = styled.div`
   gap: 20px;
 `
 
+const StyledIcons = styled.div`
+  display: flex;
+  margin-left: 160px;
+  gap: 20px;
+`
+
 const StyledLikeIcon = styled.div`
+  display: flex;
   color: black;
   font-size: 24px;
   margin-top: 10px;
-  margin-left: 200px;
   cursor: pointer;
 `
 
 const SearchBarInput = ({ ...props }) => {
   const [search, setSearch] = useState('ditto')
   const [pokemon, setPokemon] = useState()
+  const [moreInfo, setMoreInfo] = useState(false)
   const { favoritePokemons, updateFavoritePokemons } = useContext(FavoriteContext)
 
   const onChangeHandler = (event) => {
@@ -124,6 +134,11 @@ const SearchBarInput = ({ ...props }) => {
   const onSearchHandler = async (pokemon) => {
     const result = await searchPokemon(pokemon)
     setPokemon(result)
+  }
+
+  const handleMoreInfo = async () => {
+    setMoreInfo(!moreInfo)
+    console.log('mais info')
   }
 
   const onLikeClick = () => {
@@ -169,19 +184,42 @@ const SearchBarInput = ({ ...props }) => {
       </IconImageContainer>
       {pokemon ? (
         <CardContainer>
-          <StyledLikeIcon onClick={onLikeClick}>{like}</StyledLikeIcon>
-          <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-          <StyledPokemonData>
-            <StyledPokemonNameAndNumber>
-              <H2>Nome: {pokemon.name}</H2>
-              <H2>#{pokemon.id}</H2>
-            </StyledPokemonNameAndNumber>
-            <StyledPokemonType>
-              {pokemon.types.map((type, index) => {
-                return <H2 key={index}>{type.type.name}</H2>
-              })}
-            </StyledPokemonType>
-          </StyledPokemonData>
+          <StyledIcons>
+            <StyledLikeIcon onClick={onLikeClick}>{like}</StyledLikeIcon>
+            <StyledLikeIcon>
+              <AiOutlinePlusCircle onClick={handleMoreInfo} />
+            </StyledLikeIcon>
+          </StyledIcons>
+          {!moreInfo && (
+            <>
+              <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+              <StyledPokemonData>
+                <StyledPokemonNameAndNumber>
+                  <H2>Nome: {pokemon.name}</H2>
+                  <H2>#{pokemon.id}</H2>
+                </StyledPokemonNameAndNumber>
+                <StyledPokemonType>
+                  {pokemon.types.map((type, index) => {
+                    return <H2 key={index}>{type.type.name}</H2>
+                  })}
+                </StyledPokemonType>
+              </StyledPokemonData>
+            </>
+          )}
+          {moreInfo && (
+            <>
+              <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+              <StyledPokemonData>
+                <StyledPokemonNameAndNumber>
+                  {pokemon.abilities.map((ability, index) => {
+                    return <H2 key={index}>{ability.ability.name}</H2>
+                  })}
+                  <H2>Peso: {pokemon.weight} Kg</H2>
+                  <H2>Altura: {pokemon.height} m</H2>
+                </StyledPokemonNameAndNumber>
+              </StyledPokemonData>
+            </>
+          )}
         </CardContainer>
       ) : null}
     </>
