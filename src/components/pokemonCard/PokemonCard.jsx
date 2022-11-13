@@ -15,7 +15,7 @@ const CardContainer = styled.div`
   height: 280px;
   color: white;
   border-radius: 15px;
-  background-color: ${(props) => props.color};
+  background-color: ${(props) => props.theme.background};
   box-shadow: 10px 10px 10px 5px rgba(51, 51, 51, 0.8);
   transition: 0.2s ease-in-out;
   cursor: pointer;
