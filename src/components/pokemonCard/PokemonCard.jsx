@@ -22,10 +22,12 @@ const CardContainer = styled.div`
   cursor: pointer;
   transition: 0.2s ease-in-out;
   border: 5px solid ${(props) => props.theme.primary};
+  overflow: hidden;
 
   :hover {
     transform: scale(1.1);
     border: 5px solid ${(props) => props.theme.secondary};
+    overflow: auto;
   }
 `
 
@@ -110,7 +112,7 @@ const PokemonCard = ({ ...props }) => {
       {!moreInfo && (
         <>
           <H2>HP: {pokemon.stats[0].base_stat}</H2>
-          <img src={pokemon.sprites.front_default} alt={pokemon.name} height="400px" />
+          <img src={pokemon.sprites.other.home.front_default} alt={pokemon.name} height="180px" />
           <StyledPokemonData>
             <StyledPokemonNameAndNumber>
               <H2>
@@ -127,7 +129,6 @@ const PokemonCard = ({ ...props }) => {
       )}
       {moreInfo && (
         <>
-          <img src={pokemon.sprites.front_default} alt={pokemon.name} />
           <StyledPokemonData>
             <StyledPokemonNameAndNumber>
               {pokemon.abilities.map((ability, index) => {

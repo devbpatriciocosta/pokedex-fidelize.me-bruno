@@ -39,11 +39,7 @@ export default function Pokedex({ ...props }) {
         <PokedexContainer>
           {pokemon &&
             pokemon.map((pokemon, index) => {
-              return (
-                <>
-                  <PokemonCard key={index} pokemon={pokemon} />
-                </>
-              )
+              return <PokemonCard key={index} pokemon={pokemon} />
             })}
         </PokedexContainer>
       )}
