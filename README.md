@@ -1,6 +1,7 @@
 # pokedex-fidelize.me-bruno
 
 > Status: Pronto para usar ✅
+> Link do deploy: https://pokedex-fidelize-me-bruno-5pjpbst6n-devbpatriciocosta.vercel.app/
 
 ### Primeiramente gostaria de agradecer a toda equipe de RH da FIDELIZE.ME e INB pela avaliação do meu currículo e conversa ao longo da semana passada. Obrigado pelo tempo e disponibilidade de me avaliar e conversar, além de ter interesse no meu perfil... isso é extremamente gratificante. Foi uma grande oportunidade de participar desse desafio e mostrar/colocar em prática os meus conhecimentos adquiridos nos últimos 8 meses de estudo;
 ### Esse é uma ATIVIDADE proposta pelo grupo Fidelize.me com caráter de avaliação e teste de nivelamento. 
