@@ -9,10 +9,18 @@ import H2 from '../src/components/typograph/H2'
 import SearchBarInput from '../src/components/searchBarInput/SearchBarInput'
 import Pokedex from '../src/components/pokedex/Pokedex'
 import MyFavorites from '../src/components/favorites/MyFavorites'
+import IconImages from '../src/components/iconImages/IconImages'
 
 import { useEffect, useState } from 'react'
 import { getPokemons, getPokemonData } from './api/pokedex/pokemonApi'
 import { FavoriteProvider } from '../src/context/favorites'
+
+const TitlePokedex = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 30px 130px 60px 0;
+`
 
 const SecondaryContainer = styled.div`
   width: auto;
@@ -99,9 +107,13 @@ function HomePage() {
         <NavBar />
         <Body>
           <Container>
-            <H1>
-              Hey, Ash! <br></br>Qual pokémon você deseja pesquisar hoje?
-            </H1>
+            <TitlePokedex>
+              <IconImages imageName="pokedexIcon" type="svg" />
+              <H1>
+                Hey, Ash! <br></br> Eu sou sua nova Pokédex
+              </H1>
+            </TitlePokedex>
+            <H1>Qual pokémon você deseja pesquisar hoje?</H1>
             <SearchBarInput />
             <SecondaryContainer>
               <MyFavorites />

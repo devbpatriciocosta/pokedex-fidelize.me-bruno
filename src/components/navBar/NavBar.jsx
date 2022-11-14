@@ -6,7 +6,7 @@ const StyledNavBar = styled.nav`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 80px;
+  height: 140px;
   padding: 10px 0;
   background-color: ${(props) => props.theme.primary};
 
@@ -21,7 +21,7 @@ export default function NavBar() {
   return (
     <>
       <StyledNavBar>
-        <IconImages imageName="pokemonLogo" type="svg" />
+        <IconImages imageName="pokeLogo" type="svg" />
       </StyledNavBar>
     </>
   )

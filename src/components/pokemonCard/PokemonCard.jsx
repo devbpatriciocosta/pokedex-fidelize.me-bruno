@@ -50,7 +50,7 @@ const StyledPokemonType = styled.div`
 
 const StyledIcons = styled.div`
   display: flex;
-  margin-left: 160px;
+  margin: 10px 0px 20px 160px;
   gap: 20px;
 `
 
@@ -109,14 +109,13 @@ const PokemonCard = ({ ...props }) => {
       </StyledIcons>
       {!moreInfo && (
         <>
+          <H2>HP: {pokemon.stats[0].base_stat}</H2>
           <img src={pokemon.sprites.front_default} alt={pokemon.name} height="400px" />
           <StyledPokemonData>
             <StyledPokemonNameAndNumber>
               <H2>
-                {' '}
                 {pokemon.name} #{pokemon.id}
               </H2>
-              <H2>HP: {pokemon.stats[0].base_stat}</H2>
             </StyledPokemonNameAndNumber>
             <StyledPokemonType>
               {pokemon.types.map((type, index) => {
