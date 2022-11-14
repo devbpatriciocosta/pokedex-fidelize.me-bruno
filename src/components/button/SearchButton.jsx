@@ -9,9 +9,11 @@ const StyledButtonAdding = styled.button`
   color: rgba(2, 2, 2, 0.7);
   background-color: ${(props) => props.theme.buttonColor};
   transition: 0.4s;
+
   :hover {
     background-color: ${(props) => props.theme.secondary};
   }
+
   @media (max-width: 400px) {
     width: 250px;
     font-size: 20px;
@@ -19,15 +21,10 @@ const StyledButtonAdding = styled.button`
   }
 `
 
-const ButtonAdding = ({ children, loading, disabled, ...props }) => {
+const ButtonAdding = ({ children, ...props }) => {
   return (
-    <StyledButtonAdding disabled={disabled || loading} {...props}>
-      {loading && (
-        <>
-          <p>{children}</p>
-        </>
-      )}
-      {!loading && children}
+    <StyledButtonAdding {...props}>
+      <p>{children}</p>
     </StyledButtonAdding>
   )
 }

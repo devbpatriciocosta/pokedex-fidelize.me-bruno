@@ -21,10 +21,11 @@ const CardContainer = styled.div`
   box-shadow: 10px 10px 10px 5px rgba(51, 51, 51, 0.8);
   cursor: pointer;
   transition: 0.2s ease-in-out;
-  border: 5px solid #fec20c;
+  border: 5px solid ${(props) => props.theme.primary};
 
   :hover {
     transform: scale(1.1);
+    border: 5px solid ${(props) => props.theme.secondary};
   }
 `
 
@@ -62,7 +63,6 @@ const StyledLikeIcon = styled.div`
 `
 
 const transformTypeInColor = (color) => {
-  console.log(color)
   const colors = {
     grass: '#2E8B57',
     fire: '#ec4a4a',

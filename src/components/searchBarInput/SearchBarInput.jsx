@@ -34,10 +34,15 @@ const StyledInput = styled.input`
   padding: 10px 50px;
   padding-left: 80px;
   border-radius: 100px;
-  border: none;
+  border: 5px solid ${(props) => props.theme.primary};
   font-size: 30px;
   color: #000000;
   text-transform: capitalize;
+  transition: 0.2s ease-in-out;
+
+  :hover {
+    border: 5px solid ${(props) => props.theme.secondary};
+  }
 
   @media (max-width: 850px) {
     width: auto;
@@ -75,10 +80,11 @@ const CardContainer = styled.div`
   box-shadow: 10px 10px 10px 5px rgba(51, 51, 51, 0.8);
   cursor: pointer;
   transition: 0.2s ease-in-out;
-  border: 5px solid #fec20c;
+  border: 5px solid ${(props) => props.theme.primary};
 
   :hover {
     transform: scale(1.1);
+    border: 5px solid ${(props) => props.theme.secondary};
   }
 `
 
