@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import IconImages from '../iconImages/IconImages'
 
 const StyledNavBar = styled.nav`

@@ -1,13 +1,16 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @next/next/no-img-element */
-import styled from 'styled-components'
-import H2 from '../typograph/H2'
-import { AiOutlineLike } from 'react-icons/ai'
+import { useState, useContext } from 'react'
+
 import { AiFillLike } from 'react-icons/ai'
-import { useContext } from 'react'
+import { AiOutlineLike } from 'react-icons/ai'
 import { AiOutlinePlusCircle } from 'react-icons/ai'
+
+import styled from 'styled-components'
+
+import H2 from '../typograph/H2'
+
 import FavoriteContext from '../../context/favorites'
-import { useState } from 'react'
 
 const CardContainer = styled.div`
   display: flex;
@@ -136,7 +139,7 @@ const PokemonCard = ({ ...props }) => {
       )}
       {moreInfo && (
         <>
-          <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+          <img src={pokemon.sprites.other.home.front_default} alt={pokemon.name} height="110px" />
           <StyledPokemonData>
             <StyledPokemonNameAndNumber>
               {pokemon.abilities.map((ability, index) => {

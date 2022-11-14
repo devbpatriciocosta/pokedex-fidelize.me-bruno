@@ -1,5 +1,6 @@
-// eslint-disable-next-line no-unused-vars
-export default function IconImages({ imageName, type, ...props }) {
-  // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
+
+export default function IconImages({ imageName, type }) {
   return <img src={`images/${imageName}.${type}`} />
 }

@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import styled from 'styled-components'
-import PokemonCard from '../pokemonCard/PokemonCard'
+
 import H2 from '../typograph/H2'
+
+import PokemonCard from '../pokemonCard/PokemonCard'
 
 const PokedexContainer = styled.div`
   display: grid;

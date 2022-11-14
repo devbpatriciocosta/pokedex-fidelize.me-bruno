@@ -1,9 +1,10 @@
-import styled from 'styled-components'
-import H2 from '../typograph/H2'
-import PokemonCard from '../pokemonCard/PokemonCard'
-
 import { useContext } from 'react'
 import FavoriteContext from '../../context/favorites'
+
+import styled from 'styled-components'
+
+import H2 from '../typograph/H2'
+import PokemonCard from '../pokemonCard/PokemonCard'
 
 const MyFav = styled.div`
   margin-top: 30px;

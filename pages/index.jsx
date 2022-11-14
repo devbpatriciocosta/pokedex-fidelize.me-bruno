@@ -1,19 +1,20 @@
 /* eslint-disable no-undef */
-import styled from 'styled-components'
-
-import NavBar from '../src/components/navBar/NavBar'
-import Body from '../src/components/layout/body/Body'
-import Container from '../src/components/layout/container/Container'
-import H1 from '../src/components/typograph/H1'
-import H2 from '../src/components/typograph/H2'
-import SearchBarInput from '../src/components/searchBarInput/SearchBarInput'
-import Pokedex from '../src/components/pokedex/Pokedex'
-import MyFavorites from '../src/components/favorites/MyFavorites'
-import IconImages from '../src/components/iconImages/IconImages'
-
 import { useEffect, useState } from 'react'
 import { getPokemons, getPokemonData } from './api/pokedex/pokemonApi'
 import { FavoriteProvider } from '../src/context/favorites'
+
+import styled from 'styled-components'
+
+import Body from '../src/components/layout/body/Body'
+import NavBar from '../src/components/navBar/NavBar'
+import Container from '../src/components/layout/container/Container'
+import SearchBarInput from '../src/components/searchBarInput/SearchBarInput'
+import MyFavorites from '../src/components/favorites/MyFavorites'
+import Pokedex from '../src/components/pokedex/Pokedex'
+import IconImages from '../src/components/iconImages/IconImages'
+
+import H1 from '../src/components/typograph/H1'
+import H2 from '../src/components/typograph/H2'
 
 const TitlePokedex = styled.div`
   display: flex;

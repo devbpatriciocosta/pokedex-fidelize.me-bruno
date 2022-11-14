@@ -1,15 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
+import { useState, useContext } from 'react'
+
+import { AiFillLike } from 'react-icons/ai'
+import { AiOutlineLike } from 'react-icons/ai'
+import { AiOutlinePlusCircle } from 'react-icons/ai'
+
 import styled from 'styled-components'
+
 import IconImages from '../iconImages/IconImages'
 import ButtonAdding from '../button/SearchButton'
+import H2 from '../typograph/H2'
+
 import { searchPokemon } from '../../../pages/api/pokedex/pokemonApi'
 
-import { useState } from 'react'
-import { AiOutlineLike } from 'react-icons/ai'
-import { AiFillLike } from 'react-icons/ai'
-import { AiOutlinePlusCircle } from 'react-icons/ai'
-import H2 from '../typograph/H2'
-import { useContext } from 'react'
 import FavoriteContext from '../../context/favorites'
 
 const IconImageContainer = styled.div`
@@ -74,7 +77,6 @@ const CardContainer = styled.div`
   align-items: center;
   width: 280px;
   height: 430px;
-  color: white;
   border-radius: 15px;
   background-color: ${(props) => props.color};
   box-shadow: 10px 10px 10px 5px rgba(51, 51, 51, 0.8);
@@ -138,7 +140,6 @@ const SearchBarInput = ({ ...props }) => {
   const { favoritePokemons, updateFavoritePokemons } = useContext(FavoriteContext)
 
   const transformTypeInColor = (color) => {
-    console.log(color)
     const colors = {
       grass: '#2E8B57',
       fire: '#ec4a4a',
@@ -235,7 +236,11 @@ const SearchBarInput = ({ ...props }) => {
           )}
           {moreInfo && (
             <>
-              <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+              <img
+                src={pokemon.sprites.other.home.front_default}
+                alt={pokemon.name}
+                height="110px"
+              />
               <StyledPokemonData>
                 <StyledPokemonNameAndNumber>
                   {pokemon.abilities.map((ability, index) => {
