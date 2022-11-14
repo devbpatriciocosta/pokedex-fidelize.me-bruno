@@ -80,11 +80,13 @@ const CardContainer = styled.div`
   box-shadow: 10px 10px 10px 5px rgba(51, 51, 51, 0.8);
   cursor: pointer;
   transition: 0.2s ease-in-out;
-  border: 5px solid ${(props) => props.theme.primary};
+  border: 10px solid ${(props) => props.theme.primary};
+  overflow: hidden;
 
   :hover {
     transform: scale(1.1);
-    border: 5px solid ${(props) => props.theme.secondary};
+    border: 10px solid ${(props) => props.theme.secondary};
+    overflow: auto;
   }
 `
 
@@ -120,6 +122,13 @@ const StyledLikeIcon = styled.div`
   font-size: 24px;
   margin-top: 10px;
   cursor: pointer;
+`
+
+const StyledMoreInfoIcon = styled.div`
+  display: flex;
+  color: black;
+  font-size: 24px;
+  margin-top: 10px;
 `
 
 const SearchBarInput = ({ ...props }) => {
@@ -198,17 +207,23 @@ const SearchBarInput = ({ ...props }) => {
         <CardContainer color={transformTypeInColor(pokemon.types[0].type.name)}>
           <StyledIcons>
             <StyledLikeIcon onClick={onLikeClick}>{like}</StyledLikeIcon>
-            <StyledLikeIcon>
+            <StyledMoreInfoIcon>
               <AiOutlinePlusCircle onClick={handleMoreInfo} />
-            </StyledLikeIcon>
+            </StyledMoreInfoIcon>
           </StyledIcons>
           {!moreInfo && (
             <>
-              <img src={pokemon.sprites.front_default} alt={pokemon.name} height="400px" />
+              <H2>HP: {pokemon.stats[0].base_stat}</H2>
+              <img
+                src={pokemon.sprites.other.home.front_default}
+                alt={pokemon.name}
+                height="180px"
+              />
               <StyledPokemonData>
                 <StyledPokemonNameAndNumber>
-                  <H2>Nome: {pokemon.name}</H2>
-                  <H2>#{pokemon.id}</H2>
+                  <H2>
+                    {pokemon.name} #{pokemon.id}
+                  </H2>
                 </StyledPokemonNameAndNumber>
                 <StyledPokemonType>
                   {pokemon.types.map((type, index) => {

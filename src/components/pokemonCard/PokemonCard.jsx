@@ -21,12 +21,12 @@ const CardContainer = styled.div`
   box-shadow: 10px 10px 10px 5px rgba(51, 51, 51, 0.8);
   cursor: pointer;
   transition: 0.2s ease-in-out;
-  border: 5px solid ${(props) => props.theme.primary};
+  border: 10px solid ${(props) => props.theme.primary};
   overflow: hidden;
 
   :hover {
     transform: scale(1.1);
-    border: 5px solid ${(props) => props.theme.secondary};
+    border: 10px solid ${(props) => props.theme.secondary};
     overflow: auto;
   }
 `
@@ -58,6 +58,13 @@ const StyledIcons = styled.div`
 `
 
 const StyledLikeIcon = styled.div`
+  display: flex;
+  color: black;
+  font-size: 24px;
+  margin-top: 10px;
+`
+
+const StyledMoreInfoIcon = styled.div`
   display: flex;
   color: black;
   font-size: 24px;
@@ -105,9 +112,9 @@ const PokemonCard = ({ ...props }) => {
     <CardContainer color={transformTypeInColor(pokemon.types[0].type.name)}>
       <StyledIcons>
         <StyledLikeIcon onClick={onLikeClick}>{like}</StyledLikeIcon>
-        <StyledLikeIcon>
+        <StyledMoreInfoIcon>
           <AiOutlinePlusCircle onClick={handleMoreInfo} />
-        </StyledLikeIcon>
+        </StyledMoreInfoIcon>
       </StyledIcons>
       {!moreInfo && (
         <>
@@ -129,6 +136,7 @@ const PokemonCard = ({ ...props }) => {
       )}
       {moreInfo && (
         <>
+          <img src={pokemon.sprites.front_default} alt={pokemon.name} />
           <StyledPokemonData>
             <StyledPokemonNameAndNumber>
               {pokemon.abilities.map((ability, index) => {
