@@ -4,7 +4,7 @@ const StyledBody = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${(props) => props.theme.background};
+  background-color: ${(props) => props.theme.primary};
 `
 
 export default function Body({ children }) {

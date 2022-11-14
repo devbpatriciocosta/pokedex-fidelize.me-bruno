@@ -68,13 +68,14 @@ const CardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 280px;
-  height: 420px;
+  height: 430px;
   color: white;
   border-radius: 15px;
   background-color: ${(props) => props.color};
   box-shadow: 10px 10px 10px 5px rgba(51, 51, 51, 0.8);
-  transition: 0.2s ease-in-out;
   cursor: pointer;
+  transition: 0.2s ease-in-out;
+  border: 5px solid #fec20c;
 
   :hover {
     transform: scale(1.1);
@@ -126,16 +127,16 @@ const SearchBarInput = ({ ...props }) => {
     const colors = {
       grass: '#2E8B57',
       fire: '#ec4a4a',
-      water: '#00008B',
+      water: '#4ea1f0',
       bug: '#bdee7c',
       flying: '#50c1eeff',
       normal: '#cfe8f1',
-      poison: '#730BDD',
-      electric: '#EEEE00',
+      poison: '#9470e8',
+      electric: '#ffff3a',
       ground: '#6E4229',
       fairy: '#e4a3c1',
       fighting: '#000000',
-      psychic: '#9C35A7',
+      psychic: '#5b2ace',
       rock: '#A6A5AC',
       ghost: '#65767C',
       ice: '#9cd6ec',
@@ -197,7 +198,7 @@ const SearchBarInput = ({ ...props }) => {
           </StyledIcons>
           {!moreInfo && (
             <>
-              <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+              <img src={pokemon.sprites.front_default} alt={pokemon.name} height="400px" />
               <StyledPokemonData>
                 <StyledPokemonNameAndNumber>
                   <H2>Nome: {pokemon.name}</H2>
