@@ -69,11 +69,16 @@ const transformTypeInColor = (color) => {
     bug: '#bdee7c',
     flying: '#50c1eeff',
     normal: '#cfe8f1',
-    poison: '#b346f1',
+    poison: '#730BDD',
     electric: '#EEEE00',
     ground: '#6E4229',
-    fairy: '#C18FA2',
-    fighting: '#000000'
+    fairy: '#e4a3c1',
+    fighting: '#000000',
+    psychic: '#9C35A7',
+    rock: '#A6A5AC',
+    ghost: '#65767C',
+    ice: '#9cd6ec',
+    dragon: '#9B5353'
   }
   return colors[color] || 'rgb(175, 175,175,0.25)'
 }
@@ -85,7 +90,6 @@ const PokemonCard = ({ ...props }) => {
 
   const handleMoreInfo = async () => {
     setMoreInfo(!moreInfo)
-    console.log('mais info')
   }
 
   const onLikeClick = async () => {
@@ -93,7 +97,7 @@ const PokemonCard = ({ ...props }) => {
   }
 
   const like = favoritePokemons.includes(pokemon) ? <AiFillLike /> : <AiOutlineLike />
-  console.log(pokemon)
+
   return (
     <CardContainer color={transformTypeInColor(pokemon.types[0].type.name)}>
       <StyledIcons>

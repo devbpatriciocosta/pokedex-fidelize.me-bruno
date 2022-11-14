@@ -37,6 +37,7 @@ const StyledInput = styled.input`
   border: none;
   font-size: 30px;
   color: #000000;
+  text-transform: capitalize;
 
   @media (max-width: 850px) {
     width: auto;
@@ -120,6 +121,29 @@ const SearchBarInput = ({ ...props }) => {
   const [moreInfo, setMoreInfo] = useState(false)
   const { favoritePokemons, updateFavoritePokemons } = useContext(FavoriteContext)
 
+  const transformTypeInColor = (color) => {
+    console.log(color)
+    const colors = {
+      grass: '#2E8B57',
+      fire: '#ec4a4a',
+      water: '#00008B',
+      bug: '#bdee7c',
+      flying: '#50c1eeff',
+      normal: '#cfe8f1',
+      poison: '#730BDD',
+      electric: '#EEEE00',
+      ground: '#6E4229',
+      fairy: '#e4a3c1',
+      fighting: '#000000',
+      psychic: '#9C35A7',
+      rock: '#A6A5AC',
+      ghost: '#65767C',
+      ice: '#9cd6ec',
+      dragon: '#9B5353'
+    }
+    return colors[color] || 'rgb(175, 175,175,0.25)'
+  }
+
   const onChangeHandler = (event) => {
     setSearch(event.target.value)
     if (event.target.value === 0) {
@@ -142,26 +166,7 @@ const SearchBarInput = ({ ...props }) => {
   }
 
   const onLikeClick = () => {
-    updateFavoritePokemons(
-      <CardContainer>
-        <StyledLikeIcon>
-          <AiFillLike />
-        </StyledLikeIcon>
-        <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-        <StyledPokemonData>
-          <StyledPokemonNameAndNumber>
-            <H2>Nome: {pokemon.name}</H2>
-            <H2>#{pokemon.id}</H2>
-          </StyledPokemonNameAndNumber>
-          <StyledPokemonType>
-            {pokemon.types.map((type, index) => {
-              console.log(type, index)
-              return <H2 key={index}>{type.type.name}</H2>
-            })}
-          </StyledPokemonType>
-        </StyledPokemonData>
-      </CardContainer>
-    )
+    updateFavoritePokemons(pokemon)
   }
 
   const like = favoritePokemons.includes(pokemon) ? <AiFillLike /> : <AiOutlineLike />
@@ -183,7 +188,7 @@ const SearchBarInput = ({ ...props }) => {
         <ButtonAdding onClick={onClickHandler}>Buscar</ButtonAdding>
       </IconImageContainer>
       {pokemon ? (
-        <CardContainer>
+        <CardContainer color={transformTypeInColor(pokemon.types[0].type.name)}>
           <StyledIcons>
             <StyledLikeIcon onClick={onLikeClick}>{like}</StyledLikeIcon>
             <StyledLikeIcon>
