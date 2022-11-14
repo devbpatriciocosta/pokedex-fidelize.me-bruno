@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import H2 from '../typograph/H2'
+import PokemonCard from '../pokemonCard/PokemonCard'
 
 import { useContext } from 'react'
 import FavoriteContext from '../../context/favorites'
@@ -42,7 +43,16 @@ export default function MyFavorites() {
       <MyFav>
         <H2>Favoritos</H2>
       </MyFav>
-      <FavoritesPokemonContainer>{favoritePokemons}</FavoritesPokemonContainer>
+      <FavoritesPokemonContainer>
+        {favoritePokemons &&
+          favoritePokemons.map((pokemon, index) => {
+            return (
+              <>
+                <PokemonCard key={index} pokemon={pokemon} />
+              </>
+            )
+          })}
+      </FavoritesPokemonContainer>
     </>
   )
 }

@@ -61,20 +61,19 @@ const StyledLikeIcon = styled.div`
 `
 
 const transformTypeInColor = (color) => {
+  console.log(color)
   const colors = {
-    bulbasaur: '#2E8B57',
-    ivysaur: '#2E8B57',
-    venusaur: '#2E8B57',
-    charmander: '#ec4a4a',
-    charmeleon: '#ec4a4a',
-    charizard: '#ec4a4a',
-    squirtle: '#00008B',
-    wartortle: '#00008B',
-    blastoise: '#00008B',
-    caterpie: '#2E8B57',
-    metapod: '#2E8B57',
-    butterfree: '#2E8B57',
-    eletric: '#EEEE00'
+    grass: '#2E8B57',
+    fire: '#ec4a4a',
+    water: '#00008B',
+    bug: '#bdee7c',
+    flying: '#50c1eeff',
+    normal: '#cfe8f1',
+    poison: '#b346f1',
+    electric: '#EEEE00',
+    ground: '#6E4229',
+    fairy: '#C18FA2',
+    fighting: '#000000'
   }
   return colors[color] || 'rgb(175, 175,175,0.25)'
 }
@@ -83,65 +82,20 @@ const PokemonCard = ({ ...props }) => {
   const { favoritePokemons, updateFavoritePokemons } = useContext(FavoriteContext)
   const { pokemon } = props
   const [moreInfo, setMoreInfo] = useState(false)
-  const [moreInfoFavorites, setMoreInfoFavorites] = useState(false)
 
   const handleMoreInfo = async () => {
     setMoreInfo(!moreInfo)
     console.log('mais info')
   }
 
-  const handleMoreInfoFavorites = async () => {
-    setMoreInfoFavorites(!moreInfoFavorites)
-    console.log('mais info dos fav')
-  }
-
   const onLikeClick = async () => {
-    updateFavoritePokemons(
-      <CardContainer color={transformTypeInColor(pokemon.name)}>
-        <StyledIcons>
-          <StyledLikeIcon>
-            <AiFillLike />
-            <AiOutlinePlusCircle onClick={handleMoreInfoFavorites} />
-          </StyledLikeIcon>
-        </StyledIcons>
-        {!moreInfoFavorites && (
-          <>
-            <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-            <StyledPokemonData>
-              <StyledPokemonNameAndNumber>
-                <H2>Nome: {pokemon.name}</H2>
-                <H2>#{pokemon.id}</H2>
-              </StyledPokemonNameAndNumber>
-              <StyledPokemonType>
-                {pokemon.types.map((type, index) => {
-                  return <H2 key={index}>{type.type.name}</H2>
-                })}
-              </StyledPokemonType>
-            </StyledPokemonData>
-          </>
-        )}
-        {moreInfoFavorites && (
-          <>
-            <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-            <StyledPokemonData>
-              <StyledPokemonNameAndNumber>
-                {pokemon.abilities.map((ability, index) => {
-                  return <H2 key={index}>{ability.ability.name}</H2>
-                })}
-                <H2>Peso: {pokemon.weight} Kg</H2>
-                <H2>Altura: {pokemon.height} m</H2>
-              </StyledPokemonNameAndNumber>
-            </StyledPokemonData>
-          </>
-        )}
-      </CardContainer>
-    )
+    updateFavoritePokemons(pokemon)
   }
 
-  const like = favoritePokemons.includes(pokemon.name) ? <AiFillLike /> : <AiOutlineLike />
-
+  const like = favoritePokemons.includes(pokemon) ? <AiFillLike /> : <AiOutlineLike />
+  console.log(pokemon)
   return (
-    <CardContainer color={transformTypeInColor(pokemon.name)}>
+    <CardContainer color={transformTypeInColor(pokemon.types[0].type.name)}>
       <StyledIcons>
         <StyledLikeIcon onClick={onLikeClick}>{like}</StyledLikeIcon>
         <StyledLikeIcon>

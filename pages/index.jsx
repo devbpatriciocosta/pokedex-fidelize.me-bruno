@@ -76,15 +76,15 @@ function HomePage() {
     }
   }
 
-  const updateFavoritePokemons = (name) => {
-    const updatedFavorites = [...favorites]
-    const favoriteIndex = favorites.indexOf(name)
-    if (favoriteIndex >= 0) {
-      updatedFavorites.splice(favoriteIndex, 1)
+  const updateFavoritePokemons = (pokemon) => {
+    let updatedFavorites = [...favorites]
+    const isAlreadyFavorite = favorites.filter((p) => pokemon.id === p.id).length > 0
+    if (isAlreadyFavorite) {
+      updatedFavorites = updatedFavorites.filter((p) => pokemon.id != p.id)
     } else {
-      updatedFavorites.push(name)
+      updatedFavorites.push(pokemon)
     }
-    window.localStorage.setItem(favoriteIndex, JSON.stringify(updatedFavorites))
+    window.localStorage.setItem(isAlreadyFavorite, JSON.stringify(updatedFavorites))
     setFavorites(updatedFavorites)
   }
 
