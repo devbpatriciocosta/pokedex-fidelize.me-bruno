@@ -56,8 +56,8 @@ const StyledInput = styled.input`
     width: 300px;
   }
 
-  @media (max-width: 400px) {
-    width: 250px;
+  @media (max-width: 420px) {
+    width: 300px;
   }
 `
 

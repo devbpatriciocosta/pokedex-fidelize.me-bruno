@@ -20,6 +20,12 @@ const TitlePokedex = styled.div`
   align-items: center;
   gap: 20px;
   margin: 30px 130px 60px 0;
+
+  @media (max-width: 850px) {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 40px;
+  }
 `
 
 const SecondaryContainer = styled.div`
@@ -28,19 +34,6 @@ const SecondaryContainer = styled.div`
   margin: 0vh 2vh 2vh;
   flex-direction: column;
   box-sizing: border-box;
-
-  @media (max-width: 850px) {
-    width: auto;
-  }
-  @media (max-width: 630px) {
-    width: 400px;
-  }
-  @media (max-width: 510px) {
-    width: 300px;
-  }
-  @media (max-width: 400px) {
-    width: 250px;
-  }
 `
 
 const AllPokemons = styled.div`
