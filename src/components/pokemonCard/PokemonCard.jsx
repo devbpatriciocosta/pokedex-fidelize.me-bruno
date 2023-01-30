@@ -83,7 +83,7 @@ const transformTypeInColor = (color) => {
     flying: '#50c1eeff',
     normal: '#cfe8f1',
     poison: '#9470e8',
-    electric: '#ffff3a',
+    electric: '#ffff7b',
     ground: '#6E4229',
     fairy: '#e4a3c1',
     fighting: '#000000',

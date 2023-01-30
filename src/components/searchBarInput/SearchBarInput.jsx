@@ -142,13 +142,13 @@ const SearchBarInput = ({ ...props }) => {
   const transformTypeInColor = (color) => {
     const colors = {
       grass: '#2E8B57',
-      fire: '#ec4a4a',
+      fire: '#f16363',
       water: '#4ea1f0',
       bug: '#bdee7c',
       flying: '#50c1eeff',
       normal: '#cfe8f1',
       poison: '#9470e8',
-      electric: '#ffff3a',
+      electric: '#ffff7b',
       ground: '#6E4229',
       fairy: '#e4a3c1',
       fighting: '#000000',
@@ -179,7 +179,6 @@ const SearchBarInput = ({ ...props }) => {
 
   const handleMoreInfo = async () => {
     setMoreInfo(!moreInfo)
-    console.log('mais info')
   }
 
   const onLikeClick = () => {
